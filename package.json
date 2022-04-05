@@ -1,0 +1,14 @@
+{
+  "name": "2022-graphql-tute",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "node server/app",
+    "start:server:watch": "npx nodemon server/app"
+  },
+  "author": "",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,35 +1,48 @@
 const graphql = require('graphql');
 
 const {
+  GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
   GraphQLInt,
-  GraphQLSchema,
+  GraphQLList,
 } = graphql;
 
 const _dummyBooks = [
-  { name: 'Meditations', genre: 'Philosophy', id: '1' },
-  { name: 'The Discourses of Epictetus', genre: 'Philosophy', id: '2' },
-  { name: 'Philosophiae Naturalis Principia Mathematica', genre: 'Physics', id: '3' },
-  { name: 'Dragon Egg', genre: 'Science Fiction', id: '4' },
-  { name: 'Atomic Habits', genre: 'Self Improvement', id: '5' },
+  { name: 'Meditations', genre: 'Philosophy', id: '1', authorId: '1' },
+  { name: 'The Discourses of Epictetus', genre: 'Philosophy', id: '2', authorId: '2' },
+  { name: 'Letters from a Stoic', genre: 'Philosophy', id: '3', authorId: '3' },
+  { name: 'On the Shortness of Life', genre: 'Philosophy', id: '4', authorId: '3' },
+  { name: 'On the Firmness of the Wise Person', genre: 'Philosophy', id: '5', authorId: '3' },
+  { name: 'Philosophiae Naturalis Principia Mathematica', genre: 'Physics', id: '6', authorId: '4' },
+  { name: 'Dragon Egg', genre: 'Science Fiction', id: '7', authorId: '5' },
+  { name: 'Atomic Habits', genre: 'Self Improvement', id: '8', authorId: '6' },
 ];
 
 const _dummyAuthors = [
   { name: 'Marcus Aurelius', id: '1' },
   { name: 'Arrian', id: '2' },
-  { name: 'Isaac Newton', id: '3' },
-  { name: 'Robert L. Forward', id: '4' },
-  { name: 'James Clear', id: '5' },
+  { name: 'Seneca the Younger', id: '3' },
+  { name: 'Isaac Newton', id: '4' },
+  { name: 'Robert L. Forward', id: '5' },
+  { name: 'James Clear', id: '6' },
 ];
 
 const BookType = new GraphQLObjectType({
   name: 'Book',
-  fields: () => ({
+  fields: () => ({ // it should wrapped in a function so that we can use AuthorType (which has not yet been defined)
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
+    author: {
+      type: AuthorType,
+      // here the resolve function gets the Author object corresponding to the parent book
+      resolve (parent, args) {
+        const { authorId } = parent; // parent is the book returned
+        return _dummyAuthors.find(a => a.id === authorId);
+      },
+    },
   }),
 });
 
@@ -38,7 +51,15 @@ const AuthorType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    age: { type: GraphQLInt }
+    age: { type: GraphQLInt },
+    books: {
+      type: new GraphQLList(BookType),
+      // here the resolve function gets Book objects corresponding to the parent author
+      resolve (parent, args) {
+        const { id } = parent; // parent is the author returned
+        return _dummyBooks.filter(b => b.authorId === id);
+      },
+    },
   }),
 });
 

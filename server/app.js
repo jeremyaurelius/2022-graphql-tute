@@ -4,6 +4,7 @@ const storage = processArgs.storage === 'mem' ? 'mem' : 'mongo-db';
 console.log('[server/app] processArgs', processArgs);
 
 const express = require('express');
+const cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
 const mongoose = require('mongoose');
 const schema = storage === 'mem' ? require('./schema/schema-mem-storage') : require('./schema/schema');
@@ -21,6 +22,11 @@ if (storage === 'mongo-db') {
     });
   });
 }
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 
 // let graphqlHTTP middleware handle routes of /graphql
 app.use('/graphql', graphqlHTTP({

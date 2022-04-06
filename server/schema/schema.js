@@ -9,6 +9,7 @@ const {
   GraphQLID,
   GraphQLInt,
   GraphQLList,
+  GraphQLNonNull,
 } = graphql;
 
 const Book = require('../models/book');
@@ -134,7 +135,7 @@ const Mutation = new GraphQLObjectType({
     addAuthor: {
       type: AuthorType,
       args: {
-        name: { type: GraphQLString },
+        name: { type: new GraphQLNonNull(GraphQLString) },
         age: { type: GraphQLInt, defaultValue: null },
       },
       async resolve (parent, args) {
@@ -155,9 +156,9 @@ const Mutation = new GraphQLObjectType({
     addBook: {
       type: BookType,
       args: {
-        name: { type: GraphQLString },
-        genre: { type: GraphQLString },
-        authorId: { type: GraphQLID },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        genre: { type: GraphQLString, defaultValue: null },
+        authorId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve: async (parent, args) => {
         console.log('[app/server] adding book', args);

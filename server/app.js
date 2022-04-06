@@ -11,7 +11,7 @@ const app = express();
 passwordPrompt('password: ').then((password) => {
   mongoose.connect(`mongodb+srv://jeraurelius:${password}@cluster0.kn98l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
   mongoose.connection.once('open', () => {
-    console.log('[server/app] connected to DB');
+    console.log('[app/server] connected to DB');
   });
 });
 
@@ -22,5 +22,5 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 app.listen(4000, () => {
-  console.log('[server/app] now listening for requests on port 4000');
+  console.log('[app/server] now listening for requests on port 4000');
 });

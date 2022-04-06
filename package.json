@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:client": "npm run --prefix client start",
     "start:server": "node server/app",
     "watch:server": "npx nodemon server/app",
     "start:server:mem-storage": "node server/app --storage=mem",

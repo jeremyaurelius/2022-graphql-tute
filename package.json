@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start:server": "node server/app",
-    "start:server:watch": "npx nodemon server/app"
+    "watch:server": "npx nodemon server/app",
+    "start:server:mem-storage": "node server/app --storage=mem",
+    "watch:server:mem-storage": "npx nodemon server/app --storage=mem"
   },
   "author": "",
   "devDependencies": {

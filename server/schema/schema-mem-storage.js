@@ -12,8 +12,27 @@ const {
   GraphQLNonNull,
 } = graphql;
 
-const Book = require('../models/book');
-const Author = require('../models/author');
+const dummyBooks = [
+  { name: 'Meditations', genre: 'Philosophy', id: '1', authorId: '1' },
+  { name: 'The Discourses of Epictetus', genre: 'Philosophy', id: '2', authorId: '2' },
+  { name: 'Letters from a Stoic', genre: 'Philosophy', id: '3', authorId: '3' },
+  { name: 'On the Shortness of Life', genre: 'Philosophy', id: '4', authorId: '3' },
+  { name: 'On the Firmness of the Wise Person', genre: 'Philosophy', id: '5', authorId: '3' },
+  { name: 'Philosophiae Naturalis Principia Mathematica', genre: 'Physics', id: '6', authorId: '4' },
+  { name: 'Dragon Egg', genre: 'Science Fiction', id: '7', authorId: '5' },
+  { name: 'Atomic Habits', genre: 'Self Improvement', id: '8', authorId: '6' },
+];
+let nextBookID = dummyBooks.length + 1;
+
+const dummyAuthors = [
+  { name: 'Marcus Aurelius', id: '1' },
+  { name: 'Arrian', id: '2' },
+  { name: 'Seneca the Younger', id: '3' },
+  { name: 'Isaac Newton', id: '4' },
+  { name: 'Robert L. Forward', id: '5' },
+  { name: 'James Clear', id: '6' },
+];
+let nextAuthorID = dummyAuthors.length + 1;
 
 const BookType = new GraphQLObjectType({
   name: 'Book',
@@ -25,9 +44,9 @@ const BookType = new GraphQLObjectType({
       type: AuthorType,
       // here the resolve function gets the Author object corresponding to the parent book
       resolve (parent, args) {
-        const { authorId } = parent; // parent is the book returned
+        const authorId = parent.authorId + ''; // parent is the book returned
         console.log('[server/app] getting related author', authorId);
-        return Author.findById(authorId);
+        return dummyAuthors.find(a => a.id === authorId);
       },
     },
   }),
@@ -43,9 +62,9 @@ const AuthorType = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       // here the resolve function gets Book objects corresponding to the parent author
       resolve (parent, args) {
-        const { id } = parent; // parent is the author returned
+        const id = parent.id + ''; // parent is the author returned
         console.log('[server/app] getting related books', id);
-        return Book.find({ authorId: id });
+        return dummyBooks.filter(b => b.authorId === id);
       },
     },
   }),
@@ -62,9 +81,9 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve (parent, args) {
         // here we implement code to get data from DB or other source
-        const { id } = args; // we can get id from args since this has been defined above
+        const id = args.id + ''; // we can get id from args since this has been defined above
         console.log('[server/app] getting book', id);
-        return Book.findById(id);
+        return dummyBooks.find(x => x.id === id);
       },
     },
 
@@ -74,9 +93,9 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLID },
       },
       resolve (parent, args) {
-        const { id } = args;
+        const id = args.id + '';
         console.log('[server/app] getting author', id);
-        return Author.findById(id);
+        return dummyAuthors.find(x => x.id === id);
       },
     },
 
@@ -84,7 +103,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       resolve: (parent, args) => {
         console.log('[server/app] getting all books');
-        return Book.find({}); // return all books
+        return dummyBooks;
       },
     },
 
@@ -92,7 +111,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(AuthorType),
       resolve: (parent, args) => {
         console.log('[server/app] getting all authors');
-        return Author.find({}); // return all authors
+        return dummyAuthors;
       },
     },
 
@@ -114,13 +133,14 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve (parent, args) {
         console.log('[server/app] adding author', args);
-        const author = new Author({
+        const author = {
+          id: nextAuthorID++ + '',
           name: args.name,
           age: args.age,
-        });
-        const result = await author.save(); // returns Promise that resolves new Author object
-        console.log('[server/app] added author', result);
-        return result;
+        };
+        dummyAuthors.push(author);
+        console.log('[server/app] added author', author);
+        return author;
       }
     },
 
@@ -136,14 +156,15 @@ const Mutation = new GraphQLObjectType({
       },
       resolve: async (parent, args) => {
         console.log('[server/app] adding book', args);
-        const book = new Book({
+        const book = {
+          id: nextBookID++ + '',
           name: args.name,
           genre: args.genre,
           authorId: args.authorId,
-        });
-        const result = await book.save();
-        console.log('[server/app] added book', result);
-        return result;
+        };
+        dummyBooks.push(book);
+        console.log('[server/app] added book', book);
+        return book;
       }
     },
 

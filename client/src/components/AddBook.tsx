@@ -1,0 +1,95 @@
+import { getBooksQuery, getAuthorsQuery, AuthorQueryResult } from 'src/queries/queries';
+import { useState, FormEvent } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import { addBookMutation } from '../queries/queries';
+import { pickBy } from 'lodash-es';
+
+export interface AddBookProps {
+}
+
+export default function AddBook(props: AddBookProps) {
+
+  const { loading, error, data } = useQuery(getAuthorsQuery);
+
+  const [addBookFunction, addBookResult] = useMutation(addBookMutation, {
+    refetchQueries: [
+      getBooksQuery,
+    ],
+  });
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :(</p>;
+
+  const [name, setName] = useState('');
+  const [genre, setGenre] = useState('');
+  const [authorId, setAuthorId] = useState('');
+
+  console.log('[client/AddBook] rendering', {
+    loading,
+    error,
+    data,
+    addBookResult,
+    state: { name, genre, authorId }
+  });
+
+  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const rawBook = pickBy({ name, genre, authorId }, x => x); // we need to remove all empty properties
+    console.log('[client/AddBook] submitting', rawBook);
+
+    // TODO: add validation here
+    if (addBookResult.loading) {
+      return;
+    }
+
+    addBookResult.reset(); // reset errors
+
+    const result = await addBookFunction({
+      variables: rawBook,
+    });
+    console.log('[client/AddBook] result', result);
+    return result;
+  };
+
+  const displayAuthorOptions = () => {
+    if (loading) {
+      return <option disabled>Loading Authors...</option>;
+    }
+    return data?.authors.map((a: AuthorQueryResult) => {
+      return <option value={a.id} key={a.id}>{ a.name }</option>;
+    });
+  }
+
+  return (
+    <div className="mt-5">
+      <h2>Add Book</h2>
+      <form id="add-book" onSubmit={submitForm}>
+        <div className="field">
+          <label>Book name</label>
+          <input type="text" onChange={ (e) => setName(e.target.value) } />
+        </div>
+        <div className="field">
+          <label>Genre</label>
+          <input type="text" onChange={ (e) => setGenre(e.target.value) } />
+        </div>
+        <div className="field">
+          <label>Author</label>
+          <select onChange={ (e) => setAuthorId(e.target.value) }>
+            <option value="">Select author</option>
+            { displayAuthorOptions() }
+          </select>
+        </div>
+        <button className="button mt-1" type="submit" disabled={ addBookResult.loading }>
+          { addBookResult.loading ? 'Please wait' : 'Add Book' }
+        </button>
+
+        { addBookResult.error &&
+          <small className="mt-2 color-danger">
+            Error adding book: [{ addBookResult.error.name }] { addBookResult.error.message }
+          </small>
+        }
+      </form>
+    </div>
+  );
+}

@@ -1,8 +1,9 @@
-import { getBooksQuery, getAuthorsQuery, AuthorQueryResult } from 'src/queries/queries';
 import { useState, FormEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { addBookMutation } from '../queries/queries';
 import { pickBy } from 'lodash-es';
+import { addBookMutation } from 'src/queries/add-book-mutation';
+import { getAuthorsQuery, AuthorQueryResult } from 'src/queries/get-authors-query';
+import { getBooksQuery } from 'src/queries/get-books-query';
 
 export interface AddBookProps {
 }
@@ -13,7 +14,7 @@ export default function AddBook(props: AddBookProps) {
 
   const [addBookFunction, addBookResult] = useMutation(addBookMutation, {
     refetchQueries: [
-      getBooksQuery,
+      getBooksQuery, // after mutation is done, we re-fetch data using this query
     ],
   });
 

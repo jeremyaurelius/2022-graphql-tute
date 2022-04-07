@@ -1,6 +1,6 @@
 import './BookList.css';
 import { useQuery } from '@apollo/client';
-import { BookQueryResult, getBooksQuery } from 'src/queries/queries';
+import { getBooksQuery, BookQueryResult } from 'src/queries/get-books-query';
 
 export default function BookList() {
 

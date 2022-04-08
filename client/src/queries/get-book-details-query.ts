@@ -1,6 +1,7 @@
 import { Book } from 'src/models/book';
 import { gql } from '@apollo/client';
 import { Author } from 'src/models/author';
+import { BookQueryItem } from './get-books-query';
 
 export const getBookDetailsQuery = gql`
   query GetBookDetails($id: ID!) {
@@ -15,6 +16,9 @@ export const getBookDetailsQuery = gql`
         books {
           name
           id
+          author {
+            name
+          }
         }
       }
     }
@@ -27,6 +31,6 @@ export interface BookDetailsQueryData {
 
 export type BookDetailsQueryItem = Book & {
   author: Pick<Author, 'name' | 'id'> & {
-    books: Pick<Book, 'name' | 'id'>[];
+    books: BookQueryItem[];
   }
 }

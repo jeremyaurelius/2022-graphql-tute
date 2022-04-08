@@ -1,0 +1,29 @@
+.fixed-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #444;
+  width: 100%;
+  box-shadow: 0 0 0.5rem rgb(32 32 32 / 25%);
+  --danger-color: var(--danger-color-light);
+}
+
+.fixed-banner ::selection {
+  background-color: var(--dark-bg-selection);
+}
+
+.fixed-banner-toolbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8125rem;
+}
+
+.fixed-banner-contents {
+  max-width: 1024px;
+  min-width: 280px;
+  margin: auto;
+  color: #fff;
+  padding: 2rem 1.5rem 1.75rem;
+}

@@ -1,3 +1,4 @@
+import './AddBookForm.css';
 import { useState, FormEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { pickBy } from 'lodash-es';
@@ -5,10 +6,10 @@ import { addBookMutation } from 'src/queries/add-book-mutation';
 import { getAuthorsQuery, AuthorsQueryData } from 'src/queries/get-authors-query';
 import { getBooksQuery } from 'src/queries/get-books-query';
 
-export interface AddBookProps {
+export interface AddBookFormProps {
 }
 
-export default function AddBook(props: AddBookProps) {
+export default function AddBookForm(props: AddBookFormProps) {
 
   const { loading, error, data } = useQuery<AuthorsQueryData>(getAuthorsQuery);
 
@@ -64,34 +65,43 @@ export default function AddBook(props: AddBookProps) {
   }
 
   return (
-    <div className="mt-5">
-      <h2>Add Book</h2>
-      <form id="add-book" onSubmit={submitForm}>
-        <div className="field">
-          <label>Book name</label>
-          <input type="text" onChange={ (e) => setName(e.target.value) } />
-        </div>
-        <div className="field">
-          <label>Genre</label>
-          <input type="text" onChange={ (e) => setGenre(e.target.value) } />
-        </div>
-        <div className="field">
-          <label>Author</label>
-          <select onChange={ (e) => setAuthorId(e.target.value) }>
-            <option value="">Select author</option>
-            { displayAuthorOptions() }
-          </select>
-        </div>
-        <button className="button mt-1" type="submit" disabled={ addBookResult.loading }>
-          { addBookResult.loading ? 'Please wait' : 'Add Book' }
-        </button>
+    <div className="fixed-banner">
+      <div className="fixed-banner-contents">
 
-        { addBookResult.error &&
-          <small className="mt-2 color-danger">
-            Error adding book: [{ addBookResult.error.name }] { addBookResult.error.message }
-          </small>
-        }
-      </form>
+        <div className="fixed-banner-toolbar">
+          <h2 className="mt-0 mb-0">Add a Book</h2>
+          <button className="btn btn-icon-light" type="button">
+            x
+          </button>
+        </div>
+
+        <form id="add-book" onSubmit={submitForm}>
+          <div className="field">
+            <label>Book name</label>
+            <input type="text" onChange={ (e) => setName(e.target.value) } />
+          </div>
+          <div className="field">
+            <label>Genre</label>
+            <input type="text" onChange={ (e) => setGenre(e.target.value) } />
+          </div>
+          <div className="field">
+            <label>Author</label>
+            <select onChange={ (e) => setAuthorId(e.target.value) }>
+              <option value="">Select author</option>
+              { displayAuthorOptions() }
+            </select>
+          </div>
+          <button className="btn btn-lg btn-primary mt-2" type="submit" disabled={ addBookResult.loading }>
+            { addBookResult.loading ? 'Please wait...' : 'Add Book' }
+          </button>
+
+          { addBookResult.error &&
+            <small className="mt-2 color-danger">
+              Error adding book: [{ addBookResult.error.name }] { addBookResult.error.message }
+            </small>
+          }
+        </form>
+      </div>
     </div>
   );
 }

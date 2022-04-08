@@ -1,83 +1,219 @@
+body {
+  margin: 0;
+  color: #111;
+
+  /* --primary-color: #4287f5; */
+  /* --primary-color: #7ec93c; */
+  --primary-color: #7cc73a;
+  --danger-color: #e00000;
+  --danger-color-light: #eb6e6e;
+
+  /* --light-bg-selection: #d1f2b3; */
+  --light-bg-selection: rgba(186, 230, 147, 0.5);
+  --dark-bg-selection: rgba(106, 163, 55, 0.5);
+  --colored-bg-selection: rgba(160, 160, 160, 0.5);
+
+}
+
+::selection {
+  background-color: var(--light-bg-selection);
+}
+
+.page-header {
+  padding: 1.75rem 1.5rem 1.75rem;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 0.5rem rgb(32 32 32 / 25%);
+}
+
+.page-header ::selection {
+  background-color: var(--colored-bg-selection);
+}
+
+.page-header-contents {
+  max-width: 1024px;
+  min-width: 280px;
+  margin: auto;
+}
+
+.page-header .page-header-title {
+  color: #fff;
+}
+
+.page-body {
+  padding: 0 1.5rem 2rem;
+  max-width: 1024px;
+  min-width: 280px;
+  margin: auto;
+
+  padding-bottom: 400px;
+}
+
+.page-body {
+  
+}
+
+.page-section {
+  margin: 2rem 0;
+}
+
+.page-subsection {
+  margin: 1.625rem 0;
+}
+
 h1, .h1 {
   font-size: 2rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #111;
+  color: currentColor;
 }
 
 h2, .h2 {
   font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #111;
+  color: currentColor;
 }
 
 h3, .h3 {
   font-size: 1.25rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #111;
+  color: currentColor;
 }
 
 h4, .h4 {
   font-size: 1.125rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #111;
+  color: currentColor;
 }
 
 h5, .h5 {
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #111;
+  color: currentColor;
   margin: 0.25rem 0;
+}
+
+div, span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: currentColor;
 }
 
 p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   margin: 1rem 0;
-  color: #111;
+  color: currentColor;
 }
 
 small {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.875rem;
-  color: #111;
+  color: currentColor;
   display: block;
 }
 
 ul, ol {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  color: #111;
+  color: currentColor;
 }
 
-.button {
+.btn {
   border: none;
   background: none;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 1rem;
   padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
 
   /* default */
   background-color: #f1f1f1;
   color: #111;
 }
 
-button:hover {
+.btn:hover {
   background-color: #e9e9e9;
 }
 
-button:active {
+.btn:active {
   background-color: #dfdfdf;
 }
 
-/* button:focus {
-} */
+.btn.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.btn.btn-primary::selection, .btn.btn-primary ::selection {
+  background-color: var(--colored-bg-selection);
+}
+
+.btn.btn-primary:hover {
+  background-color: #6fb334;
+}
+
+.btn.btn-primary:active {
+  background-color: #65a32e;
+}
+
+.btn.btn-primary:disabled {
+  opacity: 0.65;
+}
+
+.btn:focus {
+
+}
+
+.btn.btn-lg {
+  font-size: 1.125rem;
+  padding: 0.5725rem 0.8125rem;
+}
+
+.btn-icon-light {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  background: none;
+  color: currentColor;
+  font-size: 1.5rem;
+  border-radius: 50%;
+}
+
+.btn-icon-light:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-icon-light:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.btn-icon-light:focus {
+
+}
+
+.btn-icon {
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  color: currentColor;
+  font-size: 1.75rem;
+}
+
+.btn-icon {
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  color: currentColor;
+  font-size: 1.75rem;
+}
 
 .mt-0 {
   margin-top: 0 !important;
@@ -99,8 +235,12 @@ button:active {
   margin-top: 2rem !important;
 }
 
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
 .color-danger {
-  color: #e00000 !important;
+  color: var(--danger-color) !important;
 }
 
 .field {
@@ -114,6 +254,10 @@ button:active {
   border: solid 1px #dfdfdf;
   border-radius: 0.25rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.field input::selection, .field select::selection, .field textarea::selection {
+  background-color: var(--light-bg-selection) !important;
 }
 
 .field input {

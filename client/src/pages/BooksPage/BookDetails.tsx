@@ -28,8 +28,8 @@ export default function BookDetails(props: BookDetailsProps) {
     <div className="page-section book-details">
       <h2>{ book.name }</h2>
       <div className="book-details-tags">
-        <span className="book-details-tag">{ book.author.name }</span>
-        { book.genre ? <span className="book-details-tag">{ book.genre }</span> : null }
+        <span className="book-details-tag book-details-tag-bordered">{ book.author.name }</span>
+        { book.genre ? <span className="book-details-tag book-details-tag-bordered">{ book.genre }</span> : null }
       </div>
       {
         otherBooks.length ? <div className="page-subsection">

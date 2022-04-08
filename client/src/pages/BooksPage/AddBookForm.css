@@ -4,7 +4,7 @@
   left: 0;
   background-color: #444;
   width: 100%;
-  box-shadow: 0 0 0.5rem rgb(32 32 32 / 25%);
+  box-shadow: 0 0 8px 1px rgb(32 32 32 / 25%);
   --danger-color: var(--danger-color-light);
 }
 

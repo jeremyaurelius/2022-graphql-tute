@@ -34,6 +34,26 @@ h5, .h5 {
   margin: 0.25rem 0;
 }
 
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 1rem 0;
+  color: #111;
+}
+
+small {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  color: #111;
+  display: block;
+}
+
+ul, ol {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #111;
+}
+
 .button {
   border: none;
   background: none;
@@ -102,18 +122,4 @@ button:active {
 
 .field select {
   padding: 0.5rem 1rem 0.5rem 0.25rem;
-}
-
-p {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  margin: 1rem 0;
-  color: #111;
-}
-
-small {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.875rem;
-  color: #111;
-  display: block;
 }

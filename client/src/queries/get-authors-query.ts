@@ -10,4 +10,8 @@ export const getAuthorsQuery = gql`
   }
 `;
 
-export type AuthorQueryResult = Pick<Author, 'name' | 'id'>;
+export interface AuthorsQueryData {
+  authors: AuthorsQueryItem[];
+}
+
+export type AuthorsQueryItem = Pick<Author, 'name' | 'id'>;

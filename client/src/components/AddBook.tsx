@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { pickBy } from 'lodash-es';
 import { addBookMutation } from 'src/queries/add-book-mutation';
-import { getAuthorsQuery, AuthorQueryResult } from 'src/queries/get-authors-query';
+import { getAuthorsQuery, AuthorsQueryData } from 'src/queries/get-authors-query';
 import { getBooksQuery } from 'src/queries/get-books-query';
 
 export interface AddBookProps {
@@ -10,7 +10,7 @@ export interface AddBookProps {
 
 export default function AddBook(props: AddBookProps) {
 
-  const { loading, error, data } = useQuery(getAuthorsQuery);
+  const { loading, error, data } = useQuery<AuthorsQueryData>(getAuthorsQuery);
 
   const [addBookFunction, addBookResult] = useMutation(addBookMutation, {
     refetchQueries: [
@@ -57,8 +57,9 @@ export default function AddBook(props: AddBookProps) {
     if (loading) {
       return <option disabled>Loading Authors...</option>;
     }
-    return data?.authors.map((a: AuthorQueryResult) => {
-      return <option value={a.id} key={a.id}>{ a.name }</option>;
+    if (!data) { return; }
+    return data?.authors.map((a) => {
+      return <option value={ a.id } key={ a.id }>{ a.name }</option>;
     });
   }
 

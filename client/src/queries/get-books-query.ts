@@ -14,6 +14,10 @@ export const getBooksQuery = gql`
   }
 `;
 
-export type BookQueryResult = Pick<Book, 'name' | 'id'> & {
+export interface BooksQueryData {
+  books: BookQueryItem[];
+}
+
+export type BookQueryItem = Pick<Book, 'name' | 'id'> & {
   author: Pick<Author, 'name' | 'id'>
 };

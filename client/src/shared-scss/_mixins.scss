@@ -1,0 +1,17 @@
+/**
+ * ensures everything is aligned to the main page
+ */
+@mixin pageMaxWidth() {
+  padding-left: var(--page-horizontal-padding);
+  padding-right: var(--page-horizontal-padding);
+
+  min-width: var(--frame-min-width);
+  max-width: var(--frame-max-width);
+
+  margin-left: auto;
+
+  @media screen and (min-width: 1024px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

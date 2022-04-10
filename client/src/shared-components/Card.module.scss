@@ -8,11 +8,11 @@
   &.isClickable {
     cursor: pointer;
     &:hover {
-      background-color: var(--secondary-color-2);
+      background-color: var(--secondary-color);
       box-shadow: 2px 2px 12px 0px #e9e9e9;
     }
     &:active {
-      background-color: var(--secondary-color);
+      background-color: var(--secondary-color-2);
       box-shadow: 2px 2px 12px 0px #e1e1e1;
     }  
   }

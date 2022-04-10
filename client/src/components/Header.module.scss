@@ -1,0 +1,51 @@
+@import 'src/shared-scss/_shared.scss';
+
+.header {
+  position: relative;
+  z-index: 100;
+  // padding: 1.5rem 0 1.5rem;
+  height: 4rem;
+  display: flex;
+  background-color: var(--primary-color-2);
+  box-shadow: 0 0 8px 1px rgb(32 32 32 / 25%);
+
+  &::selection {
+    background-color: var(--colored-bg-selection);
+  }
+
+  // add offset so header is aligned to page and not sidebar
+  @media screen and (min-width: 1024px) {
+    &.hasSidebar::before {
+      content: '';
+      display: block;
+      min-width: 280px;
+    }
+  }
+
+}
+
+.headerTitle {
+  --link-color: #fff;
+  margin-right: 1.25rem;
+}
+
+.headerContents {
+  @include pageMaxWidth();
+  width: 100%;
+  display: flex;
+  align-items: center;
+  --link-color: #fff;
+}
+
+.linkList {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
+  a {
+    display: block;
+    margin-right: 1.25rem;
+    color: #fff;
+  }
+}

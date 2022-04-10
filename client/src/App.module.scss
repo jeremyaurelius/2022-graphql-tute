@@ -1,0 +1,9 @@
+.mainFrame {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: calc(100vh - 4rem); // remove header height
+  // min-width: var(--frame-min-width);
+  // max-width: var(--frame-max-width);
+  // margin: auto;
+}

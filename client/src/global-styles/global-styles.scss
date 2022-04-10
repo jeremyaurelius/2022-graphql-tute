@@ -1,0 +1,149 @@
+@import-normalize; // react normalize css
+
+@import 'src/shared-scss/_shared.scss';
+@import './_typography.scss';
+@import './_buttons.scss';
+@import './forms.scss';
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  color: #111;
+
+  /* --primary-color: #4287f5; */
+  /* --primary-color: #7ec93c; */
+  --primary-color: #7cc73a;
+  --primary-color-2: #51911a;
+
+  --secondary-color: #ffdb4a;
+  --secondary-color-2: #ffd012;
+  --secondary-color-6: #c79a38;
+
+  --danger-color: #e00000;
+  --danger-color-light: #eb6e6e;
+
+  --link-color: #fff;
+
+  /* --light-bg-selection: #d1f2b3; */
+  --light-bg-selection: rgba(186, 230, 147, 0.5);
+  --dark-bg-selection: rgba(106, 163, 55, 0.5);
+  --colored-bg-selection: rgba(160, 160, 160, 0.5);
+
+  --frame-min-width: 280px;
+  --frame-max-width: 1024px;
+
+  --page-horizontal-padding: 1rem;
+
+  @media screen and (min-width: 512px) {
+    --page-horizontal-padding: 1.5rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    --page-horizontal-padding: 2rem;
+  }
+
+}
+
+::selection {
+  background-color: var(--light-bg-selection);
+}
+
+.page-frame {
+  width: 100%;
+  padding-bottom: 375px;
+}
+
+.page-jumbo {
+  background-color: #efefef;
+  padding: 1.5rem 0;
+  .page-jumbo-contents {
+    @include pageMaxWidth();
+  }
+}
+
+.page-main {
+  @include pageMaxWidth();
+  padding-bottom: 2rem;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 1rem;
+  }
+}
+
+.page-section {
+  margin: 2rem 0;
+}
+
+.page-subsection {
+  margin: 1.625rem 0;
+}
+
+$spacing-map: (
+  "0": 0,
+  "1": 0.25rem,
+  "2": 0.5rem,
+  "3": 1rem,
+  "4": 1.5rem,
+  "5": 2rem,
+);
+
+@each $level, $spacing in $spacing-map {
+  .mt-#{$level} {
+    margin-top: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .mb-#{$level} {
+    margin-bottom: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .ml-#{$level} {
+    margin-left: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .mr-#{$level} {
+    margin-right: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .pt-#{$level} {
+    padding-top: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .pb-#{$level} {
+    padding-bottom: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .pl-#{$level} {
+    padding-left: $spacing;
+  }
+}
+
+@each $level, $spacing in $spacing-map {
+  .pr-#{$level} {
+    padding-right: $spacing;
+  }
+}
+
+.color-danger {
+  color: var(--danger-color) !important;
+}
+

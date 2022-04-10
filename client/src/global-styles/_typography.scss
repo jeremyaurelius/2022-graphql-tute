@@ -1,0 +1,70 @@
+h1, .h1 {
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: currentColor;
+}
+
+h2, .h2 {
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: currentColor;
+}
+
+h3, .h3 {
+  font-size: 1.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: currentColor;
+}
+
+h4, .h4 {
+  font-size: 1.125rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: currentColor;
+}
+
+h5, .h5 {
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: currentColor;
+  margin: 0.25rem 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+div, span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: currentColor;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 1rem 0;
+  color: currentColor;
+}
+
+small {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  color: currentColor;
+  display: block;
+}
+
+ul, ol {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: currentColor;
+}
+
+// p {
+//   margin-bottom: 1.25rem;
+// }

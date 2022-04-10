@@ -5,6 +5,8 @@ import { pickBy } from 'lodash-es';
 import { addBookMutation } from 'src/queries/add-book-mutation';
 import { getAuthorsQuery, AuthorsQueryData } from 'src/queries/get-authors-query';
 import { getBooksQuery } from 'src/queries/get-books-query';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export interface AddBookFormProps {
 }
@@ -70,12 +72,12 @@ export default function AddBookForm(props: AddBookFormProps) {
 
         <div className={ styles.fixedBannerToolbar }>
           <h2 className="mt-0 mb-0">Add a Book</h2>
-          <button className="btn btn-icon-light" type="button">
-            x
+          <button className="btn btn-icon has-dark-bg is-right" type="button">
+            <FontAwesomeIcon icon={ faTimes } />
           </button>
         </div>
 
-        <form onSubmit={submitForm}>
+        <form className={ styles.addBookForm } onSubmit={submitForm}>
           <div className="field">
             <label>Book name</label>
             <input type="text" onChange={ (e) => setName(e.target.value) } />

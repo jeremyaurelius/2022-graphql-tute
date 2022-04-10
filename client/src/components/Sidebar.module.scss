@@ -1,0 +1,40 @@
+.sidebar {
+  position: relative;
+  z-index: 2;
+
+  // flex-grow: 0.5;
+  min-width: var(--frame-min-width);
+  background-color: #efefef;
+  // background-color: #fff;
+  color: #111;
+  box-shadow: 0 0 24px 1px rgb(32 32 32 / 20%);
+
+  // display: none;
+  margin-left: calc(0px - var(--frame-min-width));
+  transition: margin-left 0.3s;
+
+  @media screen and (min-width: 1024px) {
+    // display: block;
+    margin-left: 0;
+  }
+}
+
+.sidebarNav {
+  padding: 1.75rem 1.75rem;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  a {
+    display: block;
+    margin-bottom: 1.25rem;
+    font-size: 1.125rem;
+    color: #666;
+    &:hover {
+      color: var(--secondary-color-6);
+      text-decoration: underline;
+    }
+  }
+}

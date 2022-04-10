@@ -72,27 +72,27 @@ export default function AddBookForm(props: AddBookFormProps) {
 
         <div className={ styles.fixedBannerToolbar }>
           <h2 className="mt-0 mb-0">Add a Book</h2>
-          <button className="btn btn-icon has-dark-bg is-right" type="button">
+          <button className="btn btn-icon has-dark-bg is-right" type="button" aria-label="Close">
             <FontAwesomeIcon icon={ faTimes } />
           </button>
         </div>
 
         <form className={ styles.addBookForm } onSubmit={submitForm}>
-          <div className="field">
-            <label>Book name</label>
+          <label className="field">
+            <div>Book name</div>
             <input type="text" onChange={ (e) => setName(e.target.value) } />
-          </div>
-          <div className="field">
-            <label>Genre</label>
+          </label>
+          <label className="field">
+            <div>Genre</div>
             <input type="text" onChange={ (e) => setGenre(e.target.value) } />
-          </div>
-          <div className="field">
-            <label>Author</label>
+          </label>
+          <label className="field">
+            <div>Author</div>
             <select onChange={ (e) => setAuthorId(e.target.value) }>
               <option value="">Select author</option>
               { displayAuthorOptions() }
             </select>
-          </div>
+          </label>
           <button className="btn btn-lg btn-primary mt-2" type="submit" disabled={ addBookResult.loading }>
             { addBookResult.loading ? 'Please wait...' : 'Add Book' }
           </button>

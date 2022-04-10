@@ -1,7 +1,0 @@
-.book-details-tags {
-  display: flex;
-}
-
-.book-details-tags > :not(:first-child) {
-  margin-left: 0.75rem;
-}

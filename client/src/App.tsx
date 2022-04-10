@@ -1,5 +1,3 @@
-import './App.css';
-
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import BooksPage from './pages/BooksPage/BooksPage';
 

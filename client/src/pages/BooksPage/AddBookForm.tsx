@@ -1,4 +1,4 @@
-import './AddBookForm.css';
+import styles from './AddBookForm.module.scss';
 import { useState, FormEvent } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { pickBy } from 'lodash-es';
@@ -65,17 +65,17 @@ export default function AddBookForm(props: AddBookFormProps) {
   }
 
   return (
-    <div className="fixed-banner">
-      <div className="fixed-banner-contents">
+    <div className={ styles.fixedBanner }>
+      <div className={ styles.fixedBannerContents }>
 
-        <div className="fixed-banner-toolbar">
+        <div className={ styles.fixedBannerToolbar }>
           <h2 className="mt-0 mb-0">Add a Book</h2>
           <button className="btn btn-icon-light" type="button">
             x
           </button>
         </div>
 
-        <form id="add-book" onSubmit={submitForm}>
+        <form onSubmit={submitForm}>
           <div className="field">
             <label>Book name</label>
             <input type="text" onChange={ (e) => setName(e.target.value) } />

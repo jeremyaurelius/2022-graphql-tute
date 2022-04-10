@@ -1,0 +1,6 @@
+.bookBadges {
+  display: flex;
+  & > :not(:first-child) {
+    margin-left: 0.75rem;
+  }  
+}

@@ -1,4 +1,4 @@
-import './BookDetails.css';
+import styles from './BookDetails.module.scss';
 import { useQuery } from '@apollo/client';
 import { BookDetailsQueryData, getBookDetailsQuery } from 'src/queries/get-book-details-query';
 import BookList from './BookList';
@@ -26,9 +26,9 @@ export default function BookDetails(props: BookDetailsProps) {
   const otherBooks = book.author.books.filter(b => b.id !== book.id);
 
   return (
-    <div className="page-section book-details">
+    <div className="page-section">
       <h2>{ book.name }</h2>
-      <div className="book-details-tags">
+      <div className={ styles.bookBadges }>
         <Badge text={ book.author.name }></Badge>
         { book.genre ? <Badge text={ book.genre }></Badge> : null }
       </div>

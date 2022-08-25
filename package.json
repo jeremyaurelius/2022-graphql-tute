@@ -1,10 +1,10 @@
 {
-  "name": "2022-graphql-tute",
+  "name": "book-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:client": "npm run --prefix client start",
+    "start:react-client": "npm run --prefix react-client start",
     "start:server": "node server/app",
     "watch:server": "npx nodemon server/app",
     "start:server:mem-storage": "node server/app --storage=mem",
